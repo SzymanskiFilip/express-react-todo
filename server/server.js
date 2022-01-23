@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const database = require('./util/database');
+const {todosDB} = require("./util/database");
 
-app.get('/', (req, res) => {
-    database.makeConnection();
-    database.getAll();
-    res.send("1");
+app.get('/', async (req, res) => {
+    try{
+        let results = await todosDB.all();
+        res.json(results);
+    } catch (e){
+        console.log(e);
+        res.sendStatus(500);
+    }
 });
 
 

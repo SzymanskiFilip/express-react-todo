@@ -1,35 +1,27 @@
 const mysql = require('mysql');
 
-let connection = mysql.createConnection({
-    host: 'localhost',
+const pool = mysql.createPool({
+    connectionLimit: 10,
     user: "root",
     password: "root",
-    database: "todos"
+    database: "todos",
+    host: "localhost",
+    port: "3306"
 });
 
-function makeConnection(){
-    connection.connect(function(error){
-        if(!!error){
-            console.log(error);
-        } else{
-            console.log("connected");
-        }
-    });
-}
+let todosDB = {};
 
-function getAll(){
-    connection.query("SELECT * FROM todos;", function(error, rows, fields){
-        if(!!error){
-            console.log("error with query");
-        } else{
-            console.log("successful query");
-            console.log(rows);
-        }
+todosDB.all = () => {
+    return new Promise((resolve, reject) => {
+        pool.query(`SELECT * FROM todos`, (err, res) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(res);
+        });
     });
-}
+};
 
 module.exports = {
-    connection,
-    makeConnection,
-    getAll
-};
+    todosDB
+}
