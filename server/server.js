@@ -3,7 +3,11 @@ const app = express();
 const database = require('./util/database');
 const {todosDB} = require("./util/database");
 
-app.get('/', async (req, res) => {
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.get('/todos', async (req, res) => {
     try{
         let results = await todosDB.all();
         res.json(results);
@@ -13,12 +17,11 @@ app.get('/', async (req, res) => {
     }
 });
 
-
-
-
-app.use((req, res) => {
-   res.status(404).json({"message": "Endpoint not found"});
+app.post('/todos', (req,res) => {
+    todosDB.add(req.body);
+    res.json({"mgs": "Todo added successfully!"});
 });
+
 
 app.listen(3000, function(){
    console.log("Running on port 3000")
