@@ -2,10 +2,15 @@ const express = require('express');
 const app = express();
 const database = require('./util/database');
 const {todosDB} = require("./util/database");
-
+const cors = require('cors');
 var bodyParser = require('body-parser');
+
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors({
+    origin: "http://localhost:3001"
+}));
 
 app.get('/todos', async (req, res) => {
     try{
