@@ -25,20 +25,18 @@ todosDB.all = () => {
 todosDB.add = (todo) => {
 
     console.log(todo);
-    /*
     if(todo == null){
         return "Input cant be empty!";
     }
 
     return new Promise((resolve, reject) => {
-        pool.query(`INSERT INTO todos VALUES (${todo})`, (err, res) => {
+        pool.query(`INSERT INTO todos (text,done) VALUES (${todo}, false)`, (err, res) => {
             if(err){
                 return reject(err);
             }
             return resolve(res);
         });
     });
-    */
 }
 
 module.exports = {
