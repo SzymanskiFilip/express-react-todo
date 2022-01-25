@@ -52,7 +52,26 @@ todosDB.update = (id, text) => {
           return resolve(res);
        });
     });
+}
 
+todosDB.delete = (id) => {
+    console.log("deleting: " + id);
+    if(id == null){
+        return "id can't be null";
+    }
+
+    if(id < 0){
+        return "id can't be smaller than 0";
+    }
+
+    return new Promise((resolve, reject) => {
+        pool.query(`DELETE FROM todos WHERE id = ${id}`, (err, res) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(res);
+        });
+    });
 
 }
 

@@ -35,6 +35,12 @@ app.put('/todo', (req,res) => {
     res.json({"msg": "deleted"});
 });
 
+app.delete('/todo', (req, res) => {
+    let id = req.body.id;
+    todosDB.delete(id);
+    res.json({"msg": "deleted successfully"});
+});
+
 
 app.listen(3000, function(){
    console.log("Running on port 3000")
