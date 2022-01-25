@@ -28,6 +28,12 @@ app.post('/todos', (req,res) => {
     res.json({"mgs": "Todo added successfully!"});
 });
 
+app.put('/todo', (req,res) => {
+    let id = req.body.id;
+    let newText = req.body.text;
+    
+};
+
 
 app.listen(3000, function(){
    console.log("Running on port 3000")

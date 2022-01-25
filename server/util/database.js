@@ -23,7 +23,6 @@ todosDB.all = () => {
 };
 
 todosDB.add = (todo) => {
-
     console.log(todo);
     if(todo == null){
         return "Input cant be empty!";
@@ -37,6 +36,24 @@ todosDB.add = (todo) => {
             return resolve(res);
         });
     });
+}
+
+todosDB.update = (id, text) => {
+    console.log("id: " + id + "text: " + text);
+    if(id == null || text == null){
+        return "WRONG REQUEST DATA";
+    }
+
+    return new Promise((resolve, reject) => {
+       pool.query(`INSERT INTO todos SET text = ${text} WHERE id = ${id}`, (err, res) => {
+          if(err){
+              return reject(err);
+          }
+          return resolve(res);
+       });
+    });
+
+
 }
 
 module.exports = {
