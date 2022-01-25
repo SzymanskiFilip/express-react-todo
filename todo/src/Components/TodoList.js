@@ -16,18 +16,32 @@ function TodoList(){
         setTodos(json);
     }
 
-    async function deleteTodo(){
-        console.log("DELETED");
+    async function deleteTodo(id){
+        const data = {
+            "id": id
+        };
+        const requestOptions = {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        };
+
+        fetch("http://localhost:3000/todo", requestOptions)
+            .then(() => getTodos());
     }
 
-    async function markAsDone(){
-        console.log("DONE");
-    }
+
+
 
     return(
         <div className="todo-list">
             {
-                todos.map(todo => <Todo text={todo.text} key={todo.id}/>)
+                todos.map(todo => <Todo
+                    text={todo.text}
+                    key={todo.id}
+                    id={todo.id}
+                    deleteHandler={deleteTodo}
+                />)
             }
         </div>
     )
