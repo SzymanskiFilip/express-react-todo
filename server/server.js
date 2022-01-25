@@ -31,8 +31,9 @@ app.post('/todos', (req,res) => {
 app.put('/todo', (req,res) => {
     let id = req.body.id;
     let newText = req.body.text;
-    
-};
+    todosDB.update(id, newText);
+    res.json({"msg": "deleted"});
+});
 
 
 app.listen(3000, function(){
