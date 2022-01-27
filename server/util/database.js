@@ -39,13 +39,13 @@ todosDB.add = (todo) => {
 }
 
 todosDB.update = (id, text) => {
-    console.log("id: " + id + "text: " + text);
+    console.log("id: " + id + " text: " + text);
     if(id == null || text == null){
         return "WRONG REQUEST DATA";
     }
 
     return new Promise((resolve, reject) => {
-       pool.query(`INSERT INTO todos SET text = ${text} WHERE id = ${id}`, (err, res) => {
+       pool.query(`UPDATE todos SET text = '${text}' WHERE id = ${id}`, (err, res) => {
           if(err){
               return reject(err);
           }
