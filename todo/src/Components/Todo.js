@@ -12,6 +12,7 @@ function Todo(props){
 
     function handleEditable(){
         if(editable == true){
+            updateTodo();
             setEditable(false);
             setButtonText("Edit");
         }
@@ -28,7 +29,18 @@ function Todo(props){
     }
 
     async function updateTodo(){
+        const data = {
+            "id": props.id,
+            "text": todoText
+        };
+        const requestOptions = {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        };
 
+        fetch("http://localhost:3000/todo", requestOptions)
+            .then(() => console.log("updated"));
     }
 
 

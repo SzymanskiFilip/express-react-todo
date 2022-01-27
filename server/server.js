@@ -23,6 +23,7 @@ app.get('/todos', async (req, res) => {
 });
 
 app.post('/todos', (req,res) => {
+    console.log(req.body.text);
     let todo = req.body.text;
     todosDB.add(todo);
     res.json({"mgs": "Todo added successfully!"});
