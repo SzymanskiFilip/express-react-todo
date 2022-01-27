@@ -31,8 +31,6 @@ function TodoList(){
     }
 
 
-
-
     return(
         <div className="todo-list">
             {

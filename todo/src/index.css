@@ -42,3 +42,11 @@ body{
 button{
   width: 50px;
 }
+
+.todo-text{
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-weight: bold;
+}
